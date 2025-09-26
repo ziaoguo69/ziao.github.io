@@ -1,75 +1,199 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>学术主页 | 郭子傲</title>
-    <link rel="stylesheet" href="style.css">
+    <title>学术主页 Academic Homepage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            margin: 0; padding: 0;
+            background: linear-gradient(135deg, #e0e7ff 0%, #fdf6e3 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            margin: 48px auto;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 6px 32px rgba(60,60,100,0.09);
+            padding: 48px 28px 32px 28px;
+        }
+        .lang-switch {
+            text-align: right;
+            margin-bottom: 18px;
+        }
+        .lang-switch button {
+            margin-left: 7px;
+            padding: 6px 15px;
+            border: none;
+            background: #e0e7ff;
+            color: #31428c;
+            font-weight: 700;
+            font-size: 1em;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .lang-switch button:hover {
+            background: #c7d2fe;
+        }
+        h1 {
+            text-align: center;
+            margin: 0 0 24px 0;
+            font-size: 2.2em;
+            color: #31428c;
+            letter-spacing: 2px;
+        }
+        .section {
+            background: #f3f4f6;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(60,60,100,0.04);
+            padding: 24px 22px;
+            margin-bottom: 32px;
+        }
+        .section-title {
+            font-size: 1.35em;
+            color: #2d3748;
+            border-bottom: 2px solid #e0e7ff;
+            padding-bottom: 7px;
+            margin-bottom: 18px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        ul {
+            padding-left: 20px;
+            margin-top: 0;
+        }
+        li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 700px) {
+            .container { padding: 10px; }
+            .section { padding: 12px 6px; }
+            h1 { font-size: 1.5em;}
+        }
+        /* 卡片头像和简介 */
+        .profile-box {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 8px;
+        }
+        .avatar {
+            width: 96px; height: 96px;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(60,60,100,0.12);
+            object-fit: cover;
+            border: 3px solid #e0e7ff;
+        }
+        .profile-text {
+            flex: 1;
+        }
+    </style>
 </head>
 <body>
-    <!-- Header/Navbar -->
-    <header>
-        <div class="container">
-            <h1>郭子傲</h1>
-            <nav>
-                <ul>
-                    <li><a href="#about">主页</a></li>
-                    <li><a href="#research">研究</a></li>
-                    <li><a href="#publications">出版物</a></li>
-                </ul>
-            </nav>
+    <div class="container">
+        <div class="lang-switch">
+            <button onclick="setLang('zh')">中文</button>
+            <button onclick="setLang('en')">English</button>
         </div>
-    </header>
-
-    <!-- About Section -->
-    <section id="about" class="section">
-        <div class="container">
-            <h2>关于我</h2>
-            <div class="profile">
-                <img src="your-photo.jpg" alt="Your Photo">
-                <p>你好，我是郭子傲，研究领域包括人工智能、机器学习等。我的目标是通过技术创新，推动科学进步。</p>
-                <p><a href="mailto:your-email@example.com">邮箱联系</a> | <a href="https://linkedin.com/in/your-profile" target="_blank">LinkedIn</a></p>
+        <h1 id="title"></h1>
+        <div class="section">
+            <div class="section-title" id="profile-title"></div>
+            <div class="profile-box">
+                <img src="https://avatars.githubusercontent.com/u/1035403392?v=4" alt="avatar" class="avatar">
+                <div class="profile-text" id="profile"></div>
             </div>
         </div>
-    </section>
-
-    <!-- Research Section -->
-    <section id="research" class="section">
-        <div class="container">
-            <h2>研究</h2>
-            <h3>研究领域</h3>
-            <ul>
-                <li>人工智能</li>
-                <li>机器学习</li>
-                <li>自然语言处理</li>
-            </ul>
-            <h3>研究项目</h3>
-            <ul>
-                <li>项目 1: 项目描述</li>
-                <li>项目 2: 项目描述</li>
-            </ul>
+        <div class="section">
+            <div class="section-title" id="research-title"></div>
+            <div id="research"></div>
         </div>
-    </section>
-
-    <!-- Publications Section -->
-    <section id="publications" class="section">
-        <div class="container">
-            <h2>出版物</h2>
-            <ul>
-                <li><a href="#">论文标题 1</a> - 期刊名称 (年份)</li>
-                <li><a href="#">论文标题 2</a> - 期刊名称 (年份)</li>
-            </ul>
+        <div class="section">
+            <div class="section-title" id="publications-title"></div>
+            <ul id="publications"></ul>
         </div>
-    </section>
-
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Your Name. All rights reserved.</p>
+        <div class="section">
+            <div class="section-title" id="projects-title"></div>
+            <ul id="projects"></ul>
         </div>
-    </footer>
+        <div class="section">
+            <div class="section-title" id="contact-title"></div>
+            <div id="contact"></div>
+        </div>
+    </div>
+    <script>
+        // 中英文内容数据
+        const content = {
+            zh: {
+                title: "学术主页",
+                profileTitle: "个人简介",
+                profile: "张三，博士，XX大学讲师。主要研究方向为人工智能、机器学习与自然语言处理。以第一作者发表多篇顶级会议论文。",
+                researchTitle: "研究方向",
+                research: "<ul><li>人工智能</li><li>机器学习</li><li>自然语言处理</li><li>深度学习</li></ul>",
+                publicationsTitle: "论文发表",
+                publications: [
+                    "张三, 李四. 基于深度学习的文本分类方法. 《计算机学报》, 2023.",
+                    "张三, 王五. 自然语言处理中的新进展. ACL 2022.",
+                    "Zhang San, Li Si. Advances in AI. NeurIPS 2021."
+                ],
+                projectsTitle: "项目经历",
+                projects: [
+                    "面向医疗数据的智能诊断平台（负责人，2022-2024）",
+                    "自然语言理解开源工具开发（核心成员，2021-2023）"
+                ],
+                contactTitle: "联系方式",
+                contact: "邮箱: zhangsan@example.com<br>GitHub: <a href='https://github.com/ziaoguo69' target='_blank'>ziaoguo69</a>"
+            },
+            en: {
+                title: "Academic Homepage",
+                profileTitle: "Profile",
+                profile: "San Zhang, Ph.D., Lecturer at XX University. Main research interests include Artificial Intelligence, Machine Learning, and Natural Language Processing. First author of several top conference papers.",
+                researchTitle: "Research Interests",
+                research: "<ul><li>Artificial Intelligence</li><li>Machine Learning</li><li>Natural Language Processing</li><li>Deep Learning</li></ul>",
+                publicationsTitle: "Publications",
+                publications: [
+                    "San Zhang, Si Li. Text Classification Based on Deep Learning. Journal of Computer Science, 2023.",
+                    "San Zhang, Wu Wang. Advances in Natural Language Processing. ACL 2022.",
+                    "San Zhang, Si Li. Advances in AI. NeurIPS 2021."
+                ],
+                projectsTitle: "Projects",
+                projects: [
+                    "Intelligent Diagnosis Platform for Medical Data (PI, 2022-2024)",
+                    "Open-source Toolkit for NLP (Core Member, 2021-2023)"
+                ],
+                contactTitle: "Contact",
+                contact: "Email: zhangsan@example.com<br>GitHub: <a href='https://github.com/ziaoguo69' target='_blank'>ziaoguo69</a>"
+            }
+        };
+        // 根据语言切换显示内容
+        function setLang(lang) {
+            document.getElementById('title').innerText = content[lang].title;
+            document.getElementById('profile-title').innerText = content[lang].profileTitle;
+            document.getElementById('profile').innerHTML = content[lang].profile;
+            document.getElementById('research-title').innerText = content[lang].researchTitle;
+            document.getElementById('research').innerHTML = content[lang].research;
+            document.getElementById('publications-title').innerText = content[lang].publicationsTitle;
+            document.getElementById('publications').innerHTML = content[lang].publications.map(p=>`<li>${p}</li>`).join('');
+            document.getElementById('projects-title').innerText = content[lang].projectsTitle;
+            document.getElementById('projects').innerHTML = content[lang].projects.map(p=>`<li>${p}</li>`).join('');
+            document.getElementById('contact-title').innerText = content[lang].contactTitle;
+            document.getElementById('contact').innerHTML = content[lang].contact;
+        }
+        // 默认中文
+        setLang('zh');
+    </script>
 </body>
 </html>
-
 
 
